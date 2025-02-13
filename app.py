@@ -130,7 +130,7 @@ def chat():
                     f"- Temperature: {air_data['temperature']}°C\n"
                     f"- Humidity: {air_data['humidity']}%\n"
                     f"- Pressure: {air_data['pressure']} hPa\n"
-                    f"First give all the data. Then Based on these readings, How is the air quality for indoor? "
+                    f"First give all the data. This is my room data. Give me short analysis on this data. and give me short suggestions "
                 )
             else:
                 return jsonify({"response": "⚠️ Unable to retrieve air quality data. Ensure HibouAir is in range and try again."})
@@ -139,7 +139,7 @@ def chat():
             prompt = user_input
 
     ai_response = subprocess.run(
-        ["ollama", "run", "mistral", prompt],
+        ["ollama", "run", "gemma", prompt],
         capture_output=True,
         text=True
     ).stdout.strip()
