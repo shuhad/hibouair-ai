@@ -25,13 +25,10 @@ def adv_data_decode(adv):
         pressure_bytes = bytes.fromhex(adv[pos + 18:pos + 22])
         pressure = int.from_bytes(pressure_bytes, byteorder="little") / 10
 
-        # Temperature (convert from little-endian)
-        temp_hex = int(adv[pos + 22:pos + 26][::-1], 16)
-        if temp_hex > 1000:
-            temperature = (temp_hex - (65535 + 1)) / 10
-        else:
-            temperature = temp_hex / 10
+        temperature_bytes = bytes.fromhex(adv[pos + 22:pos + 26])
+        temperature = int.from_bytes(temperature_bytes, byteorder="little") / 10
 
+        
         # Humidity (convert from little-endian)
         humidity_bytes = bytes.fromhex(adv[pos + 26:pos + 30])
         humidity = int.from_bytes(humidity_bytes, byteorder="little") / 10
